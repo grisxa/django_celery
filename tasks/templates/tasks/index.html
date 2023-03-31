@@ -1,0 +1,22 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'tasks/style.css' %}">
+<script src="{% static 'tasks/api.js' %}"></script>
+
+<h2>Current tasks</h2>
+{% if task_list %}
+    <ul>
+        {% for task in task_list %}
+            <li>
+                {{ task.title }}
+                <span id="span-{{ task.id }}" class="{{ task.status.lower }}">{{ task.status }}</span>
+                {% if task.is_new %}
+                    <button id="button-{{ task.id }}" onclick="startTask({{ task.id }})">Start</button>
+                {% endif %}
+            </li>
+            <li><em>created: {{ task.created }}, updated: {{ task.updated }}</em></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasks are available.</p>
+{% endif %}

@@ -1,0 +1,39 @@
+body {
+    font: 300 12pt "Helvetica", "Arial", sans-serif;
+}
+
+em {
+    font: 200 11pt serif;
+    font-style: italic;
+}
+
+button {
+    line-height: 1.1rem;
+    font-size: 12pt;
+    padding: 0.35rem 0.3rem 0.25rem 0.3rem;
+    margin: 0;
+}
+
+li:nth-child(odd) {
+    line-height: 1.8rem;
+}
+
+li:nth-child(even) {
+    list-style-type: none;
+    margin-bottom: 0.4rem;
+}
+
+.new {
+    background-color: lightblue;
+    padding: 0.1rem 0.4rem 0.06rem;
+}
+
+.pending {
+    background-color: yellow;
+    padding: 0.1rem 0.4rem 0.06rem;
+}
+
+.ready {
+    background-color: lightgreen;
+    padding: 0.1rem 0.4rem 0.06rem;
+}
