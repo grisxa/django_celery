@@ -23,7 +23,7 @@ function getStatus(id) {
                 span.setAttribute("class", response.toLowerCase());
             }
             const button = document.getElementById(`button-${id}`);
-            if (button) {
+            if (button && response.toLowerCase() != "new") {
                 button.style.display = 'none';
             }
             return response;
@@ -45,6 +45,6 @@ function startTask(id) {
     fetch(`/tasks/${id}/start`)
         .then(expandResponse)
         .then(() => getStatus(id))
-        .then(() => monitorTask(id))
+        .then(response => response != "Ready" ? monitorTask(id) : null)
         .catch(error => console.error("Starting has failed", error))
 }

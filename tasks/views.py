@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import generic
 
-from tasks.models import Task, State
+from tasks.models import Task
+from celery_tasks import start_task, fibonacci_sum
 
 
 class IndexView(generic.ListView):
@@ -21,7 +22,8 @@ def status(request, task_id: int):
 
 def start(request, task_id: int):
     logging.debug(f"Starting task {task_id}")
-    task = get_object_or_404(Task, pk=task_id)
-    task.status = State.PENDING
-    task.save()
+
+    start_task(task_id)
+    fibonacci_sum.delay(task_id, 500000)
+
     return HttpResponse("OK")

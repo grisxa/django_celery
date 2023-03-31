@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.utils import timezone
 
 
 class State(models.TextChoices):
@@ -16,7 +17,7 @@ class Task(models.Model):
     updated = models.DateTimeField(default=datetime.now)
 
     def save(self, *args, **kwargs):
-        self.updated = datetime.now()
+        self.updated = timezone.now()
         super().save(*args, **kwargs)
 
     @property
