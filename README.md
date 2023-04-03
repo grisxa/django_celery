@@ -8,7 +8,14 @@ RabbitMQ must be running:
 ```docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management```
 
 As the Celery itself:
-```celery -A tasks worker --loglevel=INFO```
+```celery -A django_celery worker --loglevel=INFO```
+
+### Docker
+Another way is to use all-in-one Docker script:
+```
+docker-compose build
+docker-compose up
+```
 
 ## Using
 To create or update the task use the admin app http://127.0.0.1/admin/

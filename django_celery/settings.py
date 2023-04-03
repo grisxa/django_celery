@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -125,6 +128,25 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery Configuration Options
-CELERY_TIMEZONE = "Asia/Yerevan"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
+# Celery Settings
+try:
+    from kombu import Queue
+    from celery import Celery
+
+    CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', default='amqp://localhost')
+    if CELERY_BROKER_URL:
+        CELERY_TIMEZONE = "Asia/Yerevan"
+        CELERY_TASK_TRACK_STARTED = True
+        CELERY_TASK_TIME_LIMIT = 30 * 60
+        CELERYD_TASK_SOFT_TIME_LIMIT = 60
+        CELERY_ACCEPT_CONTENT = ['application/json']
+        CELERY_TASK_SERIALIZER = 'json'
+        CELERY_RESULT_SERIALIZER = 'json'
+        CELERY_DEFAULT_QUEUE = 'default'
+        CELERY_QUEUES = (
+            Queue('default'),
+        )
+        CELERY_CREATE_MISSING_QUEUES = True
+except ModuleNotFoundError:
+    print("Celery/kombu not installed. Skipping...")
+

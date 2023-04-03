@@ -24,6 +24,6 @@ def start(request, task_id: int):
     logging.debug(f"Starting task {task_id}")
 
     start_task(task_id)
-    fibonacci_sum.delay(task_id, 500000)
+    fibonacci_sum.apply_async((task_id, 500000), queue='default')
 
     return HttpResponse("OK")
