@@ -20,6 +20,8 @@ docker-compose up
 ## Using
 To create or update the task use the admin app http://127.0.0.1/admin/
 
-New tasks can be started with respective button. Pending tasks are refreshing
+Login: admin, password: admin
+
+New tasks can be started with the respective button. Pending tasks are refreshing
 each 10 seconds until coming to the Ready state.
 
