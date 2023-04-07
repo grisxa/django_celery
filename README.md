@@ -24,7 +24,7 @@ Login: admin, password: admin
 
 Or switch to the REST API to add a task there:
 
-http://127.0.0.1:8000/tasks/api/list/
+http://127.0.0.1:8000/tasks/api/
 
 New tasks can be started with the respective button. Pending tasks are refreshing
 each 10 seconds until coming to the Ready state, see http://127.0.0.1/tasks/
