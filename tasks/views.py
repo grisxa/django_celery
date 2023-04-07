@@ -11,7 +11,7 @@ from tasks.serializers import TaskSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by('-created')
+    queryset = Task.objects.all().order_by('created')
     serializer_class = TaskSerializer
 
 
@@ -19,6 +19,7 @@ class IndexView(generic.ListView):
     model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'task_list'
+    ordering = 'created'
 
 
 def status(request, task_id: int):
