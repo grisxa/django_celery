@@ -9,6 +9,7 @@ router.register('', views.TaskViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     # ex: /tasks/
     path('', views.IndexView.as_view(), name='index'),
     # ex: /tasks/5/status/
