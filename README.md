@@ -22,6 +22,9 @@ To create or update the task use the admin app http://127.0.0.1/admin/
 
 Login: admin, password: admin
 
-New tasks can be started with the respective button. Pending tasks are refreshing
-each 10 seconds until coming to the Ready state.
+Or switch to the REST API to add a task there:
 
+http://127.0.0.1:8000/tasks/api/list/
+
+New tasks can be started with the respective button. Pending tasks are refreshing
+each 10 seconds until coming to the Ready state, see http://127.0.0.1/tasks/

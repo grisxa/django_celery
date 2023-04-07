@@ -3,9 +3,16 @@ import logging
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import generic
+from rest_framework import viewsets
 
-from tasks.models import Task
 from celery_tasks import start_task, fibonacci_sum
+from tasks.models import Task
+from tasks.serializers import TaskSerializer
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all().order_by('-created')
+    serializer_class = TaskSerializer
 
 
 class IndexView(generic.ListView):
